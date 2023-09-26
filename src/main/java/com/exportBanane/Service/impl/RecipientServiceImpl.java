@@ -58,7 +58,7 @@ public class RecipientServiceImpl implements RecipientService {
         Recipient recipient = RecipientDto.toEntity(dto);
         Recipient existingRecipient = repository.findById(recipient.getId()).get();
         if (existingRecipient == null) {
-            throw new EntityNotFoundException("destinataire not found with the Id:" + recipient.getId());
+            throw new EntityNotFoundException("Recipient not found with the Id:" + recipient.getId());
         }
         existingRecipient.setAddress(dto.getAddress());
         existingRecipient.setName(dto.getName());

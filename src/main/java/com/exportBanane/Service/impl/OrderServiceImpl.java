@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 
         validator.validate(dto);
         Order order = OrderDto.toEntity(dto);
-        order.setCreatedDate(LocalDate.now());
+        order.setCreatedDate(LocalDate.now()); // TODO order entity
 
         if (!OrderUtil.isValidDeliveryDate(order.getDeliveryDate())) {
             throw new OrdreNoPermittedException("Delivery date must be at least one week in the future", "save operation", "OrderServiceImpl");
@@ -58,10 +58,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> findByRecipientId(Integer id) {
         List<OrderDto> orders;
-        try {
+
             orders = repository.findByRecipientId(id).stream().map(OrderDto::fromEntity).collect(Collectors.toList());
-        } catch (EntityNotFoundException e) {
-            throw new EntityNotFoundException("Order not found with the ID: " + id);
+        if (orders.isEmpty()) {
+            throw new EntityNotFoundException("Order not found with the recipient ID: " + id);
         }
         return orders;
     }

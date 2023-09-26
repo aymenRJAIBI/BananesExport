@@ -3,6 +3,7 @@ package com.exportBanane.controllers;
 import com.exportBanane.Service.RecipientService;
 import com.exportBanane.dto.RecipientDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,8 @@ import java.util.List;
 @RequestMapping("/recipients")
 @RequiredArgsConstructor
 public class RecipientController {
+
+    @Autowired
     public final RecipientService service;
 
     @PostMapping("/")
